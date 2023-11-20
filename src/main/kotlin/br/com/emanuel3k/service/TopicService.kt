@@ -63,4 +63,10 @@ class TopicService(
     fun list(): List<Topic> {
         return topics
     }
+
+    fun getById(id: Long): Topic {
+        return topics.stream().filter { t ->
+            t.id == id
+        }.findFirst().get()
+    }
 }
