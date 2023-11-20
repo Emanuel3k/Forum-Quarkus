@@ -9,7 +9,7 @@ data class Topic(
     val message: String,
     val creationDate: LocalDateTime = LocalDateTime.now(),
     val author: User,
-    val answers: List<Answers> = ArrayList(),
+    val answers: List<Answer> = ArrayList(),
     val course: Course,
     val status: StatusTopic = StatusTopic.NOT_ANSWERD,
 )

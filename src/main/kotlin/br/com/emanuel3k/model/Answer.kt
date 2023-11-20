@@ -2,7 +2,7 @@ package br.com.emanuel3k.model
 
 import java.time.LocalDateTime
 
-data class Answers(
+data class Answer(
     val id: Long? = null,
     val message: String,
     val creationDate: LocalDateTime = LocalDateTime.now(),
