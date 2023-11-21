@@ -1,7 +1,7 @@
 package br.com.emanuel3k.controller
 
-import br.com.emanuel3k.dto.NewTopicDTO
-import br.com.emanuel3k.model.Topic
+import br.com.emanuel3k.dto.TopicForm
+import br.com.emanuel3k.dto.TopicView
 import br.com.emanuel3k.service.TopicService
 import jakarta.inject.Inject
 import jakarta.ws.rs.GET
@@ -16,18 +16,18 @@ class TopicController(
 ) {
 
     @GET
-    fun list(): List<Topic> {
+    fun list(): List<TopicView> {
         return service.list()
     }
 
     @GET
     @Path("/{id}")
-    fun getById(@PathParam("id") id: Long): Topic {
+    fun getById(@PathParam("id") id: Long): TopicView {
         return service.getById(id)
     }
 
     @POST
-    fun register(dto: NewTopicDTO) {
+    fun register(dto: TopicForm) {
         service.register(dto)
     }
 }
