@@ -4,6 +4,7 @@ import br.com.emanuel3k.dto.TopicForm
 import br.com.emanuel3k.dto.TopicView
 import br.com.emanuel3k.service.TopicService
 import jakarta.inject.Inject
+import jakarta.validation.Valid
 import jakarta.ws.rs.GET
 import jakarta.ws.rs.POST
 import jakarta.ws.rs.Path
@@ -27,7 +28,7 @@ class TopicController(
     }
 
     @POST
-    fun register(dto: TopicForm) {
+    fun register(@Valid dto: TopicForm) {
         service.register(dto)
     }
 }
