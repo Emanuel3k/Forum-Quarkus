@@ -1,5 +1,6 @@
 package br.com.emanuel3k.controller
 
+import br.com.emanuel3k.dto.NewTopicDTO
 import br.com.emanuel3k.model.Topic
 import br.com.emanuel3k.service.TopicService
 import jakarta.inject.Inject
@@ -26,7 +27,7 @@ class TopicController(
     }
 
     @POST
-    fun register(topic: Topic) {
-        service.register(topic)
+    fun register(dto: NewTopicDTO) {
+        service.register(dto)
     }
 }
