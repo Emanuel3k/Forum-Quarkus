@@ -4,6 +4,7 @@ import br.com.emanuel3k.model.Topic
 import br.com.emanuel3k.service.TopicService
 import jakarta.inject.Inject
 import jakarta.ws.rs.GET
+import jakarta.ws.rs.POST
 import jakarta.ws.rs.Path
 import jakarta.ws.rs.PathParam
 
@@ -20,7 +21,12 @@ class TopicController(
 
     @GET
     @Path("/{id}")
-    fun getById(@PathParam("id") id: Long):Topic {
+    fun getById(@PathParam("id") id: Long): Topic {
         return service.getById(id)
+    }
+
+    @POST
+    fun register(topic: Topic) {
+        service.register(topic)
     }
 }
