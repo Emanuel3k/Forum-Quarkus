@@ -4,7 +4,7 @@ import br.com.emanuel3k.model.enums.StatusTopic
 import java.time.LocalDateTime
 
 data class Topic(
-    val id: Long? = null,
+    var id: Long? = null,
     val title: String,
     val message: String,
     val creationDate: LocalDateTime = LocalDateTime.now(),
