@@ -1,6 +1,7 @@
 package br.com.emanuel3k.service
 
 import br.com.emanuel3k.dto.TopicForm
+import br.com.emanuel3k.dto.TopicUpdate
 import br.com.emanuel3k.dto.TopicView
 import br.com.emanuel3k.mapper.TopicFormMapper
 import br.com.emanuel3k.mapper.TopicViewMapper
@@ -32,5 +33,21 @@ class TopicService(
         val topic = topicFormMapper.map(dto)
         topic.id = topics.size.toLong() + 1
         topics = topics.plus(topic)
+    }
+
+    fun update(dto: TopicUpdate) {
+        val topic = topics.stream().filter{t ->
+            t.id == dto.id
+        }.findFirst().get()
+
+        topics = topics.minus(topic).plus(Topic(
+            id = dto.id,
+            message = dto.message,
+            title = dto.title,
+            author = topic.author,
+            creationDate = topic.creationDate,
+            status = topic.status,
+            course = topic.course,
+        ))
     }
 }
