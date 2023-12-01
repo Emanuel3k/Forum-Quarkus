@@ -6,15 +6,11 @@ import br.com.emanuel3k.dto.TopicView
 import br.com.emanuel3k.service.TopicService
 import jakarta.inject.Inject
 import jakarta.validation.Valid
-import jakarta.ws.rs.GET
-import jakarta.ws.rs.POST
-import jakarta.ws.rs.PUT
-import jakarta.ws.rs.Path
-import jakarta.ws.rs.PathParam
+import jakarta.ws.rs.*
 
 @Path("/topics")
 class TopicController(
-    @Inject
+    @field:Inject
     private val service: TopicService,
 ) {
 
@@ -37,5 +33,11 @@ class TopicController(
     @PUT
     fun update(@Valid dto: TopicUpdate) {
         service.update(dto)
+    }
+
+    @DELETE
+    @Path("/{id}")
+    fun delete(@PathParam("id") id: Long) {
+        service.delete(id)
     }
 }
