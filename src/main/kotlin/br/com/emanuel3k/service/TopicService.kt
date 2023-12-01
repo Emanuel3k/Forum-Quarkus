@@ -7,14 +7,18 @@ import br.com.emanuel3k.mapper.TopicFormMapper
 import br.com.emanuel3k.mapper.TopicViewMapper
 import br.com.emanuel3k.model.Topic
 import jakarta.enterprise.context.ApplicationScoped
+import jakarta.inject.Inject
 import java.util.stream.Collectors
 
 @ApplicationScoped
 class TopicService(
     private var topics: List<Topic> = ArrayList(),
-    private val topicViewMapper: TopicViewMapper = TopicViewMapper(),
-    private val topicFormMapper: TopicFormMapper = TopicFormMapper(),
 ) {
+    @Inject
+    private lateinit var topicViewMapper: TopicViewMapper
+    @Inject
+    private lateinit var topicFormMapper: TopicFormMapper
+
     fun list(): List<TopicView> {
         return topics.stream().map { t ->
             topicViewMapper.map(t)
@@ -36,18 +40,28 @@ class TopicService(
     }
 
     fun update(dto: TopicUpdate) {
-        val topic = topics.stream().filter{t ->
+        val topic = topics.stream().filter { t ->
             t.id == dto.id
         }.findFirst().get()
 
-        topics = topics.minus(topic).plus(Topic(
-            id = dto.id,
-            message = dto.message,
-            title = dto.title,
-            author = topic.author,
-            creationDate = topic.creationDate,
-            status = topic.status,
-            course = topic.course,
-        ))
+        topics = topics.minus(topic).plus(
+            Topic(
+                id = dto.id,
+                message = dto.message,
+                title = dto.title,
+                author = topic.author,
+                creationDate = topic.creationDate,
+                status = topic.status,
+                course = topic.course,
+            )
+        )
+    }
+
+    fun delete(id: Long) {
+        val topic = topics.stream().filter { t ->
+            t.id == id
+        }.findFirst().get()
+
+        topics = topics.minus(topic)
     }
 }
